@@ -1,10 +1,3 @@
-/*
- * LCD.h
- *
- * Created: 6/6/2021 3:35:15 PM
- * Author : Mustafa Yehia
- */ 
-
 #include <avr/io.h>
 #include "std_macros.h"
 

@@ -1,10 +1,3 @@
-/*
- * LCD.h
- *
- * Created: 6/6/2021 4:07:25 PM
- * Author : Mustafa Yehia
- */ 
-
 #include "LCD.h"
 #define F_CPU 16000000UL 
 #include <util/delay.h>

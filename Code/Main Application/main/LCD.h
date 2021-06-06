@@ -1,10 +1,3 @@
-/*
- * LCD.h
- *
- * Created: 6/6/2021 4:07:05 PM
- * Author : Mustafa Yehia
- */ 
-
 #ifndef LCD_H
 #define LCD_H
 

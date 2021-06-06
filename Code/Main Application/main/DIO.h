@@ -1,10 +1,3 @@
-/*
- * DIO.h
- *
- * Created: 6/6/2021 3:30:39 PM
- * Author : Mustafa Yehia
- */ 
-
 #ifndef DIO_H
 #define DIO_H
 

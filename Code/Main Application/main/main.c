@@ -1,10 +1,3 @@
-/*
- * main.c
- *
- * Created: 6/6/2021 2:48:41 PM
- * Author : Mustafa Yehia
- */ 
-
 #define F_CPU 16000000UL
 
 #include "Basic_Types.h"
