@@ -149,13 +149,13 @@ void DIO_set_port_direction(unsigned char portname, unsigned char direction)
 {
 	switch(portname)
 	{
-		case 'A' :
+		case 'A':
 			DDRA = direction; /* Set the direction of port A */
 			break;
 		case 'B':
 			DDRB = direction; /* Set the direction of port B */
 			break;
-		case 'C' :
+		case 'C':
 			DDRC = direction; /* Set the direction of port C */
 			break;
 		case 'D':
@@ -164,7 +164,6 @@ void DIO_set_port_direction(unsigned char portname, unsigned char direction)
 		default:
 			break;
 	}
-	
 }
 
 void DIO_write_port(unsigned char portname, unsigned char portvalue)

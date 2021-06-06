@@ -129,6 +129,12 @@
     <Compile Include="DIO.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Keypad.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Keypad.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="LCD.c">
       <SubType>compile</SubType>
     </Compile>
@@ -139,6 +145,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="SPI.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="SPI.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="std_macros.h">

@@ -4,7 +4,11 @@
 
 DIO.c
 
+Keypad.c
+
 LCD.c
 
 main.c
+
+SPI.c
 
