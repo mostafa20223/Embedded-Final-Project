@@ -4,8 +4,10 @@
 #define four_bits_mode
 #define LCD_NPINs 8
 #define LCD_PORT 'A'
-#define RS_PORT 'B' /* Register Selection */
-#define RW_PORT 'B' /* Read/Write */
-#define EN_PORT 'B' /* Enable */
+#define RS_PORT 'A' /* Register Selection */
+#define RW_PORT 'A' /* Read/Write */
+#define EN_PORT 'A' /* Enable */
+#define Max_Row 2
+#define Max_Col 16
 
 #endif /* LCD_CONFIG_H */

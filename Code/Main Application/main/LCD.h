@@ -1,6 +1,8 @@
 #ifndef LCD_H
 #define LCD_H
 
+#include "Basic_Types.h"
+
 #define CLR_SCREEN 0x01
 #define CURSOR_ON_DISPLAN_ON 0x0e
 #define RETURN_HOME 0x02
@@ -18,12 +20,68 @@
 	#define EIGHT_BITS 0x38
 #endif
 
+/*
+	Function Name        : LCD_vInit
+	Function Returns     : void
+	Function Arguments   : void
+	Function Description : Returns 1 if the '#' Key is Pressed and 0 if not
+*/
 void LCD_vInit(void);
+
+/*
+	Function Name        : send_falling_edge
+	Function Returns     : void
+	Function Arguments   : void
+	Function Description : Returns 1 if the '#' Key is Pressed and 0 if not
+*/
 void send_falling_edge(void);
-void LCD_vSend_cmd(char cmd);
-void LCD_vSend_char(char data);
-void LCD_vSend_string(char *data);
+
+/*
+	Function Name        : LCD_vSend_cmd
+	Function Returns     : void
+	Function Arguments   : char cmd
+	Function Description : Returns 1 if the '#' Key is Pressed and 0 if not
+*/
+void LCD_vSend_cmd(c8 cmd);
+
+/*
+	Function Name        : LCD_vSend_char
+	Function Returns     : void
+	Function Arguments   : char data
+	Function Description : Returns 1 if the '#' Key is Pressed and 0 if not
+*/
+void LCD_vSend_char(c8 data);
+
+/*
+	Function Name        : LCD_vSend_string
+	Function Returns     : void
+	Function Arguments   : char * data
+	Function Description : Returns 1 if the '#' Key is Pressed and 0 if not
+*/
+void LCD_vSend_string(c8 * data);
+
+/*
+	Function Name        : LCD_clearscreen
+	Function Returns     : void
+	Function Arguments   : void
+	Function Description : Returns 1 if the '#' Key is Pressed and 0 if not
+*/
 void LCD_clearscreen(void);
-void LCD_movecursor(char row, char coloumn);
+
+/*
+	Function Name        : LCD_movecursor
+	Function Returns     : void
+	Function Arguments   : char row, char coloumn
+	Function Description : Returns 1 if the '#' Key is Pressed and 0 if not
+*/
+void LCD_movecursor(c8 row, c8 coloumn);
+
+/*
+	Function Name        : LCD_SendStringRowCol
+	Function Returns     : void
+	Function Arguments   : u8 row, u8 col, u8 *str
+	Function Description : Returns 1 if the '#' Key is Pressed and 0 if not
+*/
+void LCD_SendStringRowCol(u8 row, u8 col, c8 *str);
 
 #endif /* LCD_H */

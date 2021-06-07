@@ -120,6 +120,12 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="app.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="app.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Basic_Types.h">
       <SubType>compile</SubType>
     </Compile>

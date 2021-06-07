@@ -1,16 +1,14 @@
 #include <util/delay.h>
 
-#include "Basic_Types.h"
 #include "DIO.h"
 #include "LCD_config.h"
 #include "LCD.h"
 
-static const uint8_t LCD_PINs[LCD_NPINs] = {0, 1, 2, 3, 4, 5, 6, 7};
-static uint8_t counter = 0;
+static u8 counter = 0;
 
 void LCD_vInit(void)
 {
-	_delay_ms(50); /* 200 ms */
+	_delay_ms(20);
 
 	#if defined eight_bits_mode
 		for (counter = 0; counter < LCD_NPINs; ++counter)
@@ -62,7 +60,7 @@ void send_falling_edge(void)
 	_delay_ms(2);
 }
 
-void LCD_vSend_cmd(char cmd)
+void LCD_vSend_cmd(c8 cmd)
 {
 	#if defined eight_bits_mode
 		DIO_write_port(LCD_PORT, cmd);
@@ -82,7 +80,7 @@ void LCD_vSend_cmd(char cmd)
 	_delay_ms(1);
 }
 
-void LCD_vSend_char(char data)
+void LCD_vSend_char(c8 data)
 {
 	#if defined eight_bits_mode
 		DIO_write_port(LCD_PORT, data);
@@ -102,7 +100,7 @@ void LCD_vSend_char(char data)
 	_delay_ms(1);
 }
 
-void LCD_vSend_string(char *data)
+void LCD_vSend_string(c8 * data)
 {
 	/* (*data): Pointer to first char of string */
 	while((*data) != '\0')
@@ -118,7 +116,7 @@ void LCD_clearscreen(void)
 	_delay_ms(10);
 }
 
-void LCD_movecursor(char row, char coloumn)
+void LCD_movecursor(c8 row, c8 coloumn)
 {
 	char data = 0;
 	
@@ -137,4 +135,10 @@ void LCD_movecursor(char row, char coloumn)
 	
 	LCD_vSend_cmd(data);
 	_delay_ms(1);
+}
+
+void LCD_SendStringRowCol(u8 row, u8 col, c8 *str)
+{
+	LCD_movecursor(row, col);
+	LCD_vSend_string(str);
 }

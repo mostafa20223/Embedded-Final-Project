@@ -8,16 +8,18 @@
 #include "SPI.h"
 
 /* Enable MOSI, SCK and SS Output */
-static const char SPI_PINs[3] = {4, 5, 7};
-static uint8_t counter = 0;
+static const u8 SPI_PINs[SPI_NPINs] = {4, 5, 7};
+static u8 counter = 0;
 
 void SPI_masterInit(void)
 {
 	/* Enable MOSI, SCK and SS Output */
-	for (counter = 0; counter < 3; ++counter)
-	{
-		DIO_vsetPINDir(SPI_PORT, counter, 1);
-	}
+	//for (counter = 0; counter < SPI_NPINs; ++counter)
+	//{
+		//DIO_vsetPINDir(SPI_PORT, SPI_PINs[counter], 0xff);
+	//}
+	
+	DDRB = (1 << 7) | (1 << 5) | (1 << 4);
 	
 	/* Enable Master Mode */
 	SET_BIT(SPCR, MSTR);
@@ -37,13 +39,13 @@ void SPI_masterTransmit(char data)
 	SPDR = data;
 	
 	/* Wait for Completion */
-	while(!(SPSR &(1 << SPIF)));
+	while(!(SPSR & (1 << SPIF)));
 }
 
 char SPI_masterReceive(void)
 {	
 	/* wait for the SPI buffer's full */
-	while(!(SPSR &(1 << SPIF)));
+	while(!(SPSR & (1 << SPIF)));
 	/* return SPI buffer */
 	return SPDR;
 }
@@ -54,44 +56,9 @@ void TC72_Init(void)
 	/* Select control register */
 	SPI_masterTransmit(0x80);
 	
-	/* Select Continous temperature conversion */
+	/* Select Continuous temperature conversion */
 	SPI_masterTransmit(0x04);
 	CLR_BIT(PORTB, 4);
 	
 	_delay_ms(150);
-}
-
-void Start_Communication(void)
-{
-	DIO_set_port_direction('A', 0xFF);
-	DIO_set_port_direction('D', 0xFF);
-	DIO_set_port_direction('C', 0xFF);
-
-	char msb = 0;
-	char lsb = 0;
-
-	SPI_masterInit();
-	TC72_Init();
-	_delay_ms(150);
-
-	while (1)
-	{
-		PORTB |= (1 << 4);
-		/* Read the MSB */
-		SPI_masterTransmit(0x02);
-		/* Issue one more clock frame to force data out */
-		SPI_masterTransmit(0x00);
-		PORTB &= ~(1 << 4);
-		_delay_ms(1);
-		msb = SPI_masterReceive();
-		PORTB|=(1<<4);
-		/* Read The LSB */
-		SPI_masterTransmit(0x01);
-		/* Issue one more clock frame to force data out */
-		SPI_masterTransmit(0x00);
-		PORTB &= ~(1 << 4);
-		_delay_ms(1);
-		lsb = SPI_masterReceive();
-		PORTA = lsb;
-	}
 }
