@@ -21,7 +21,8 @@ int main(void)
 			LCD_SendStringRowCol(2, 1, "STATE:OPERATION");
 			LCD_movecursor(1, 5);
 			//u8 value = UsrGetVal();
-			Start_Communication();
+			//Start_Communication();
+			tc72_read();
 	    }
 		else
 		{

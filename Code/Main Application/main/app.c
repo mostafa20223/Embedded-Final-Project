@@ -1,5 +1,6 @@
 #include "app.h"
-
+#include "std_macros.h"
+#include <avr/io.h>
 static u8 shift = 0;
 
 void Init(void)
@@ -60,7 +61,7 @@ u8 UsrGetVal(void)
 	return keypadPress;
 }
 
-void Start_Communication(void)
+/*void Start_Communication(void)
 {
 	c8 msb = 0;
 	c8 lsb = 0;
@@ -75,13 +76,14 @@ void Start_Communication(void)
 		SPI_masterTransmit(0x02);
 		// Issue one more clock frame to force data out
 		SPI_masterTransmit(0x00);
-	
+		
 		//DIO_vsetPINDir(SPI_PORT, 4, 0);
 		PORTB &= ~(1 << 4);
 		_delay_ms(1);
-	
 		msb = SPI_masterReceive();
 		msb <<= 1;
+		//LCD_movecursor(1, 15);
+		//LCD_vSend_char(msb);
 		//DIO_vsetPINDir(SPI_PORT, 4, 1);
 		PORTB |= (1 << 4);
 	
@@ -95,16 +97,59 @@ void Start_Communication(void)
 		_delay_ms(1);
 	
 		lsb = SPI_masterReceive();
+		c8 CurrentTempString[2];
+		//itoa(lsb,CurrentTempString,10);
 		lsb >>= 7;
 		//PORTD = lsb;
-
+		//LCD_movecursor(1, 15);
+		//LCD_vSend_string(CurrentTempString);
 		TempVal = (msb | lsb);
+		itoa(TempVal,CurrentTempString,10);
+		LCD_movecursor(1, 15);
+		LCD_vSend_string(CurrentTempString);
+		//TempVal = msb ;
 		
 		//LCD_movecursor(1, 15);
 		//LCD_vSend_char('4');
 		//LCD_movecursor(1, 16);
 		//LCD_vSend_char('3');
-		LCD_movecursor(1, 15);
-		LCD_vSend_char(TempVal);
+		////LCD_movecursor(1, 15);
+		////LCD_vSend_char(TempVal);
+		//_delay_ms(20);
+	}
+}*/
+
+void tc72_read(void){
+    char LSB = 0;        /* store temperature value */
+    char MSB = 0;
+	char CurrentTempString[4];
+    char tempValue = 0;
+    /* ----------- LSB ---------- */
+	while(1){
+    PORTB |= (1 << 4);
+    SPI_masterTransmit(0x01);
+    SPI_masterTransmit(0x00);
+    PORTB &= ~(1 << 4);
+
+    _delay_ms(1);
+    LSB = SPI_masterReceive();
+
+    /* ----------- MSB ---------- */
+
+    PORTB |= (1 << 4);
+    SPI_masterTransmit(0x02);            /* read will be from MSB temperature register */
+    SPI_masterTransmit(0x00);
+    PORTB &= ~(1 << 4);
+
+    _delay_ms(1);
+    MSB = SPI_masterReceive();
+
+    LSB >>= 7;
+    //MSB <<= 1;
+    tempValue = MSB | LSB;
+	
+	itoa(MSB,CurrentTempString,10);
+    LCD_movecursor(1, 15);
+    LCD_vSend_string(CurrentTempString);
 	}
 }

@@ -52,6 +52,6 @@ u8 UsrGetVal(void);
 	Function Arguments   : void
 	Function Description : Start SPI communication with TC72 (Temperature Sensor)
 */
-void Start_Communication(void);
+void tc72_read(void);
 
 #endif /* APP_H */
