@@ -4,6 +4,8 @@
 
 APPL\app.c
 
+MCAL\pwm.c
+
 schedular\Scheduler.c
 
 schedular\systemState.c

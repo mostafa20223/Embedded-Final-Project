@@ -43,6 +43,7 @@ SUBDIRS :=  \
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
 ../APPL/app.c \
+../MCAL/pwm.c \
 ../schedular/Scheduler.c \
 ../schedular/systemState.c \
 ../schedular/timer8bit.c \
@@ -63,6 +64,7 @@ ASM_SRCS +=
 
 OBJS +=  \
 APPL/app.o \
+MCAL/pwm.o \
 schedular/Scheduler.o \
 schedular/systemState.o \
 schedular/timer8bit.o \
@@ -76,6 +78,7 @@ Timer.o
 
 OBJS_AS_ARGS +=  \
 APPL/app.o \
+MCAL/pwm.o \
 schedular/Scheduler.o \
 schedular/systemState.o \
 schedular/timer8bit.o \
@@ -89,6 +92,7 @@ Timer.o
 
 C_DEPS +=  \
 APPL/app.d \
+MCAL/pwm.d \
 schedular/Scheduler.d \
 schedular/systemState.d \
 schedular/timer8bit.d \
@@ -102,6 +106,7 @@ Timer.d
 
 C_DEPS_AS_ARGS +=  \
 APPL/app.d \
+MCAL/pwm.d \
 schedular/Scheduler.d \
 schedular/systemState.d \
 schedular/timer8bit.d \
@@ -128,6 +133,13 @@ LINKER_SCRIPT_DEP+=
 
 # AVR32/GNU C Compiler
 APPL/app.o: ../APPL/app.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+MCAL/pwm.o: ../MCAL/pwm.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
