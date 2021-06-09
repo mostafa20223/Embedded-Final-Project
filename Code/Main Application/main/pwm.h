@@ -1,3 +1,3 @@
 void InitPWM();
-void SetPWMOutput(uint8_t vr);
+void SetPWMOutput(float64_t vr,float64_t vt);
 void Wait();

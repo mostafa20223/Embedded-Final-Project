@@ -7,16 +7,17 @@
 
 #include <avr/io.h>
 #include <util/delay.h>
-
+#include "Basic_Types.h"
 void InitPWM()
 {
 	TCCR0|=(1<<WGM00)|(1<<WGM01)|(1<<COM01)|(1<<CS00);
 	DDRB|=(1<<PB3);
+	OCR1A = 3000;
 }
-void SetPWMOutput(uint8_t vr)
+void SetPWMOutput(float64_t vr,float64_t vt)
 {
 	uint8_t duty = 0;
-	duty =  (((vr * 2)/10) * 100) / 10;
+	duty =  (((vr * 2)/10) *vt) / 10;
 	OCR0=duty;
 }
 void Wait()
