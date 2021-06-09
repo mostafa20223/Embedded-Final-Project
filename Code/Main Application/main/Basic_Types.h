@@ -30,4 +30,6 @@ typedef unsigned short int u16;
 */
 typedef unsigned long int u32;
 
+typedef double float64_t;
+
 #endif /* BASIC_TYPES_H */

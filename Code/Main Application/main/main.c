@@ -1,10 +1,11 @@
 #include "app.h"
-
+#include "ADC.h"
 int main(void)
 {
 	Init();
 	Welcome_Screen();
 	IDLE_Screen();
+	initADC0();
 	
     /* Replace with your application code */
     while (1)
@@ -13,6 +14,9 @@ int main(void)
 		//T0delay();
 		//LCD_vSend_char('B');
 		//T0delay();
+		
+		u32 result = adc_read();
+		float64_t Vr = sampleToVolts(result);
 		
 	    u8 val = UsrGetVal();
 	    
