@@ -2,6 +2,15 @@
 
 static u8 shift = 0;
 
+void Init(void)
+{
+	LCD_vInit();
+	keypad_vInit();
+	SPI_masterInit();
+	TC72_Init();
+	_delay_ms(150);
+}
+
 void Welcome_Screen(void)
 {
 	LCD_movecursor(1, 1);
@@ -28,21 +37,27 @@ void Welcome_Screen(void)
 
 void IDLE_Screen(void)
 {
-	LCD_clearscreen();
-	_delay_ms(100);
+	_delay_ms(20);
 	LCD_SendStringRowCol(1, 1, "SET:25");
 	LCD_SendStringRowCol(1, 11, "CRT:");
 	LCD_SendStringRowCol(2, 1, "STATE:STANDBY");
-	LCD_movecursor(1, 5);
 }
 
-void UsrGetVal(void)
+u8 UsrGetVal(void)
 {
-	u8 preesed = keypad_u8check_press();
-	LCD_vSend_char(preesed);
-	_delay_ms(1000);
-	LCD_clearscreen();
-	_delay_ms(1000);
+	u8 keypadPress = getKey();
+	
+	if (keypadPress == '#')
+	{
+		_delay_ms(20);
+	}
+	else
+	{
+		LCD_vSend_char(keypadPress);
+		_delay_ms(20);		
+	}
+	
+	return keypadPress;
 }
 
 void Start_Communication(void)
@@ -50,42 +65,38 @@ void Start_Communication(void)
 	c8 msb;
 	c8 lsb;
 
-	SPI_masterInit();
-	TC72_Init();
-	_delay_ms(150);
-
 	while(1)
 	{
 		//DIO_vsetPINDir(SPI_PORT, 4, 1);
 		PORTB |= (1 << 4);
-	
-		/* Read the MSB */
+		
+		// Read the MSB
 		SPI_masterTransmit(0x02);
-	
-		/* Issue one more clock frame to force data out */
+		
+		// Issue one more clock frame to force data out
 		SPI_masterTransmit(0x00);
-	
+		
 		//DIO_vsetPINDir(SPI_PORT, 4, 0);
 		PORTB &= ~(1 << 4);
 		_delay_ms(1);
-	
+		
 		msb = SPI_masterReceive();
 		//DIO_vsetPINDir(SPI_PORT, 4, 1);
 		PORTB |= (1 << 4);
-	
-		/* Read The LSB */
+		
+		// Read The LSB
 		SPI_masterTransmit(0x01);
-	
-		/* Issue one more clock frame to force data out */
+		
+		// Issue one more clock frame to force data out
 		SPI_masterTransmit(0x00);
-	
+		
 		//DIO_vsetPINDir(SPI_PORT, 4, 0);
 		PORTB &= ~(1 << 4);
 		_delay_ms(1);
-	
+		
 		lsb = SPI_masterReceive();
 		//PORTD = lsb;
-		LCD_vSend_char(lsb);
+	
+		//displayTemperature(msb, lsb);
 	}
 }
-

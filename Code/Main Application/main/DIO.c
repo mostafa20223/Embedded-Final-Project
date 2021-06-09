@@ -1,7 +1,8 @@
 #include <avr/io.h>
 #include "std_macros.h"
+#include "DIO.h"
 
-void DIO_vsetPINDir(unsigned char portname, unsigned char pinnumber, unsigned char direction)
+void DIO_vsetPINDir(u8 portname, u8 pinnumber, u8 direction)
 {
 	switch(portname)
 	{
@@ -50,7 +51,7 @@ void DIO_vsetPINDir(unsigned char portname, unsigned char pinnumber, unsigned ch
 	}
 }
 
-void DIO_write(unsigned char portname, unsigned char pinnumber, unsigned char outputvalue)
+void DIO_write(u8 portname, u8 pinnumber, u8 outputvalue)
 {
 	switch(portname)
 	{
@@ -99,9 +100,9 @@ void DIO_write(unsigned char portname, unsigned char pinnumber, unsigned char ou
 	}
 }
 
-unsigned char DIO_u8read(unsigned char portname, unsigned char pinnumber)
+u8 DIO_u8read(u8 portname, u8 pinnumber)
 {
-	unsigned char return_value = 0;
+	u8 return_value = 0;
 	
 	switch(portname)
 	{
@@ -124,7 +125,7 @@ unsigned char DIO_u8read(unsigned char portname, unsigned char pinnumber)
 	return return_value;
 }
 
-void DIO_toggle(unsigned char portname, unsigned char pinnumber)
+void DIO_toggle(u8 portname, u8 pinnumber)
 {
 	switch(portname)
 	{
@@ -145,7 +146,7 @@ void DIO_toggle(unsigned char portname, unsigned char pinnumber)
 	}
 }
 
-void DIO_set_port_direction(unsigned char portname, unsigned char direction)
+void DIO_set_port_direction(u8 portname, u8 direction)
 {
 	switch(portname)
 	{
@@ -166,7 +167,7 @@ void DIO_set_port_direction(unsigned char portname, unsigned char direction)
 	}
 }
 
-void DIO_write_port(unsigned char portname, unsigned char portvalue)
+void DIO_write_port(u8 portname, u8 portvalue)
 {
 	switch(portname)
 	{
@@ -187,9 +188,9 @@ void DIO_write_port(unsigned char portname, unsigned char portvalue)
 	}
 }
 
-unsigned char DIO_read_port(unsigned char portname)
+u8 DIO_read_port(u8 portname)
 {
-	unsigned char return_val = 0;
+	u8 return_val = 0;
 	
 	switch(portname)
 	{
@@ -263,7 +264,7 @@ void DIO_vconnectpullup(char portname, char pinnumber, char connect_pullup)
 	}
 }
 
-void write_low_nibble(unsigned char portname, unsigned char value)
+void write_low_nibble(u8 portname, u8 value)
 {
 	value &= 0x0f;
 	
@@ -290,7 +291,7 @@ void write_low_nibble(unsigned char portname, unsigned char value)
 	}
 }
 
-void write_high_nibble(unsigned char portname, unsigned char value)
+void write_high_nibble(u8 portname, u8 value)
 {
 	value <<= 4;
 	

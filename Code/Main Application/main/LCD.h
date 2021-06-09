@@ -77,11 +77,19 @@ void LCD_clearscreen(void);
 void LCD_movecursor(c8 row, c8 coloumn);
 
 /*
-	Function Name        : LCD_SendStringRowCol
+	Function Name        : LCD_SendCharRowCol
 	Function Returns     : void
-	Function Arguments   : u8 row, u8 col, u8 *str
+	Function Arguments   : u8 row, u8 col, c8 data
 	Function Description : Returns 1 if the '#' Key is Pressed and 0 if not
 */
-void LCD_SendStringRowCol(u8 row, u8 col, c8 *str);
+void LCD_SendCharRowCol(u8 row, u8 col, c8 data);
+
+/*
+	Function Name        : LCD_SendStringRowCol
+	Function Returns     : void
+	Function Arguments   : u8 row, u8 col, c8 * str
+	Function Description : Returns 1 if the '#' Key is Pressed and 0 if not
+*/
+void LCD_SendStringRowCol(u8 row, u8 col, c8 * data);
 
 #endif /* LCD_H */

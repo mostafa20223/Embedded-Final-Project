@@ -42,7 +42,8 @@ C_SRCS +=  \
 ../Keypad.c \
 ../LCD.c \
 ../main.c \
-../SPI.c
+../SPI.c \
+../Timer.c
 
 
 PREPROCESSING_SRCS += 
@@ -57,7 +58,8 @@ DIO.o \
 Keypad.o \
 LCD.o \
 main.o \
-SPI.o
+SPI.o \
+Timer.o
 
 OBJS_AS_ARGS +=  \
 app.o \
@@ -65,7 +67,8 @@ DIO.o \
 Keypad.o \
 LCD.o \
 main.o \
-SPI.o
+SPI.o \
+Timer.o
 
 C_DEPS +=  \
 app.d \
@@ -73,7 +76,8 @@ DIO.d \
 Keypad.d \
 LCD.d \
 main.d \
-SPI.d
+SPI.d \
+Timer.d
 
 C_DEPS_AS_ARGS +=  \
 app.d \
@@ -81,7 +85,8 @@ DIO.d \
 Keypad.d \
 LCD.d \
 main.d \
-SPI.d
+SPI.d \
+Timer.d
 
 OUTPUT_FILE_PATH +=main.elf
 
@@ -133,6 +138,13 @@ LINKER_SCRIPT_DEP+=
 	
 
 ./SPI.o: .././SPI.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+./Timer.o: .././Timer.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

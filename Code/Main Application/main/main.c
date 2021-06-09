@@ -2,20 +2,32 @@
 
 int main(void)
 {
-	LCD_vInit();
-	keypad_vInit();
-	
+	Init();
 	Welcome_Screen();
+	IDLE_Screen();
 	
     /* Replace with your application code */
     while (1)
     {
-		IDLE_Screen();
-		UsrGetVal();
-		Start_Communication();
-		//uint8_t Pressed_Value = keypad_u8check_press();
-		//_delay_ms(100);
-		//LCD_vSend_char(Pressed_Value);
+		LCD_vSend_char('A');
+		T0delay();
+		LCD_vSend_char('B');
+		T0delay();
+		
+	    //u8 val = UsrGetVal();
+	    //
+	    //if (val == '#')
+	    //{
+			//LCD_SendStringRowCol(2, 1, "STATE:OPERATION");
+			//LCD_movecursor(1, 5);
+			//u8 value = UsrGetVal();
+			//Start_Communication();
+	    //}
+		//else
+		//{
+			///* Do nothing */
+		//}
 		
     }
+
 }

@@ -33,4 +33,7 @@ u8 keypad_u8check_press(void);
 */
 u8 check_OPKey(void);
 
+u8 Keypad_u8Scan(void);
+u8 getKey(void);
+
 #endif /* KEYPAD_H */

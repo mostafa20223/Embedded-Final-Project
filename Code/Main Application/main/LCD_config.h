@@ -2,8 +2,8 @@
 #define LCD_CONFIG_H
 
 #define four_bits_mode
-#define LCD_NPINs 8
-#define LCD_PORT 'A'
+#define LCD_NPINs 4
+#define LCD_PORT 'D'
 #define RS_PORT 'A' /* Register Selection */
 #define RW_PORT 'A' /* Read/Write */
 #define EN_PORT 'A' /* Enable */
