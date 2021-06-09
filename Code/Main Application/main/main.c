@@ -1,11 +1,14 @@
-#include "app.h"
-#include "ADC.h"
+#include "APPL/app.h"
+
 int main(void)
 {
 	Init();
 	Welcome_Screen();
 	IDLE_Screen();
-	initADC0();
+	UsrGetVal();
+
+	//StartApp();
+	//sei();
 	
     /* Replace with your application code */
     while (1)
@@ -15,24 +18,15 @@ int main(void)
 		//LCD_vSend_char('B');
 		//T0delay();
 		
-		u32 result = adc_read();
-		float64_t Vr = sampleToVolts(result);
+		//CRT_Temp();
+		float64_t Vr = getADCVal();
 		
-	    u8 val = UsrGetVal();
-	    
-	    if (val == '#')
-	    {
-			LCD_SendStringRowCol(2, 1, "STATE:OPERATION");
-			LCD_movecursor(1, 5);
-			//u8 value = UsrGetVal();
-			//Start_Communication();
-			tc72_read();
-	    }
-		else
-		{
-			/* Do nothing */
-		}
-		
+
     }
 
 }
+
+//ISR(SPI_STC_vect)
+//{
+	//UsrGetVal();
+//}

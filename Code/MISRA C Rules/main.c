@@ -1,10 +1,14 @@
-#include "app.h"
+#include "APPL/app.h"
 
 int main(void)
 {
 	Init();
 	Welcome_Screen();
 	IDLE_Screen();
+	UsrGetVal();
+
+	//StartApp();
+	//sei();
 	
     /* Replace with your application code */
     while (1)
@@ -14,20 +18,15 @@ int main(void)
 		//LCD_vSend_char('B');
 		//T0delay();
 		
-	    u8 val = UsrGetVal();
-	    
-	    if (val == '#')
-	    {
-			LCD_SendStringRowCol(2, 1, "STATE:OPERATION");
-			LCD_movecursor(1, 5);
-			//u8 value = UsrGetVal();
-			Start_Communication();
-	    }
-		else
-		{
-			/* Do nothing */
-		}
+		//CRT_Temp();
+		float64_t Vr = getADCVal();
 		
+
     }
 
 }
+
+//ISR(SPI_STC_vect)
+//{
+	//UsrGetVal();
+//}

@@ -1,0 +1,1 @@
+"./Timer.obj" "./main.obj" "./APPL/app.obj" "./HAL/Keypad.obj" "./HAL/LCD.obj" "./MCAL/ADC.obj" "./MCAL/DIO.obj" "./MCAL/SPI.obj" "./MCAL/pwm.obj" "./schedular/Scheduler.obj" "./schedular/systemState.obj" "./schedular/timer8bit.obj" -llibc.a 

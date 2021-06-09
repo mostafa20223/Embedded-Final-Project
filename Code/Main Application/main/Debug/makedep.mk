@@ -2,19 +2,25 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
-ADC.c
+APPL\app.c
 
-app.c
+schedular\Scheduler.c
 
-DIO.c
+schedular\systemState.c
 
-Keypad.c
+schedular\timer8bit.c
 
-LCD.c
+HAL\Keypad.c
+
+HAL\LCD.c
+
+MCAL\ADC.c
+
+MCAL\DIO.c
+
+MCAL\SPI.c
 
 main.c
-
-SPI.c
 
 Timer.c
 
