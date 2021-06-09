@@ -1,32 +1,33 @@
-/*
- * main.c
- *
- * Created: 6/6/2021 2:48:41 PM
- * Author : Mustafa Yehia
- */ 
-
-#define F_CPU 16000000UL
-
-#include "Basic_Types.h"
-#include "DIO/DIO.h"
-#include "LCD/LCD.h"
-#include "LCD/LCD_config.h"
-#include <avr/io.h>
-#include <util/delay.h>
+#include "app.h"
 
 int main(void)
 {
-	LCD_vInit();
-	uchar_t row = 1;
-	uchar_t col = 8;
+	Init();
+	Welcome_Screen();
+	IDLE_Screen();
 	
     /* Replace with your application code */
-    while (1) 
+    while (1)
     {
-		LCD_vSend_string("WELCOME");
-		LCD_movecursor(row, col);
-		_delay_ms(100);
-		LCD_clearscreen();
+		//LCD_vSend_char('A');
+		//T0delay();
+		//LCD_vSend_char('B');
+		//T0delay();
+		
+	    u8 val = UsrGetVal();
+	    
+	    if (val == '#')
+	    {
+			LCD_SendStringRowCol(2, 1, "STATE:OPERATION");
+			LCD_movecursor(1, 5);
+			//u8 value = UsrGetVal();
+			Start_Communication();
+	    }
+		else
+		{
+			/* Do nothing */
+		}
+		
     }
-}
 
+}
