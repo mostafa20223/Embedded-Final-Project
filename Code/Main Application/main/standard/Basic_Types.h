@@ -1,6 +1,10 @@
 #ifndef BASIC_TYPES_H
 #define BASIC_TYPES_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 /********************************* Global Types ********************************/
 /*
 	Type name: c8

@@ -3,7 +3,7 @@
 void InitPWM(void)
 {
 	TCCR0 |= (1 << WGM00) | (1 << WGM01) | (1 << COM01) | (1 << CS00);
-	DDRB |= (1 << PB3);
+	PWM_DDR |= (1 << PWM_PIN);
 	OCR1A = 3000;
 }
 

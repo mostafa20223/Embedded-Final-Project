@@ -1,37 +1,17 @@
 #include "systemState.h"
-#include "Scheduler.h"
-#include "Basic_Types.h"
 
 enum sysStates {STANDBY, OPERATION, NORMAL, ERROR};
-const char * StatesName[] = {"STANDBY", "OPERATION", "NORMAL", "ERROR"};
-
+const c8 * StatesName[] = {"STANDBY", "OPERATION", "NORMAL", "ERROR"};
 static enum sysStates curState = STANDBY;
+static c8 hash_pressed = 0;
+static c8 errorFlag = 0;
 
-static char hash_pressed = 0;
-
-static char errorFlag = 0;
-
-void setErrorFlag()
+void setErrorFlag(void)
 {
 	errorFlag = 1;
 }
 
-void clearErrorFlag()
-{
-	errorFlag = 0;
-}
-
-// TODO
-int getCurrentTemp()
-{
-	;
-}
-int getSetTemp()
-{
-	;
-}
-
-void setState()
+void setState(void)
 {
 	switch (curState)
 	{
@@ -40,7 +20,7 @@ void setState()
 			clearVoltModule();
 			clearCheckTemp();
 
-			if (hash_pressed == 1)
+			if (getKey() == '#')
 			{
 				curState = OPERATION;
 			}
@@ -52,8 +32,8 @@ void setState()
 			setCheckTemp();
 			setVoltModule();
 
-			u8 currentTemp = getCurrentTemp();
-			u8 setTemp = getSetTemp();
+			u16 currentTemp = getCurrentTemp();
+			u16 setTemp = getSetTemp();
 			if ((currentTemp > setTemp) && ((currentTemp - setTemp) <= 5))
 			{
 				curState = NORMAL;
@@ -76,11 +56,11 @@ void setState()
 				setOverHeating();
 			}
 
-			if (hash_pressed == 1)
+			if (getKey() == '#')
 			{
 				curState = STANDBY;
 			}
-			if(errorFlag)
+			if (errorFlag)
 			{
 				curState = ERROR;
 			}
@@ -100,7 +80,8 @@ void setState()
 			clearVoltModule();
 			break;
 		}
+		
 		default:
-		break;
+			break;
 	}
 }

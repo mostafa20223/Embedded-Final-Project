@@ -27,3 +27,21 @@ float64_t sampleToVolts(u32 sample)
 {
 	return sample * (5.0 / 1023.0);
 }
+
+void WriteVolt(void)
+{
+	DIO_vsetPINDir(ADC_PORT, 0, 1);
+	u32 result = adc_read();
+	float64_t Vr = sampleToVolts(result);
+	
+	if (Vr > 2.5)
+	{
+		DIO_write(ADC_PORT, 0, 0);
+	}
+	else
+	{
+		DIO_write(ADC_PORT, 0, 1);
+		//PORTD = 0b00100000;
+	}
+	_delay_ms(1000);
+}

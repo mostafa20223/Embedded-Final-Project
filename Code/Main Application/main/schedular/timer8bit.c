@@ -1,12 +1,5 @@
 #include "timer8bit.h"
 
-/*
-volatile u8 * const OCRs[] = {OCR0, OCR2};
-volatile u8 const OCIEs[] = {OCIE0, OCIE2};
-volatile u8 * const TCCRs[] = {TCCR0, TCCR2};
-volatile u8 * const TCNTs[] = {TCNT0, TCNT2};
-*/
-
 void init_timer_CTC(u8 id, u8 TimerValue)
 {
 	// TimerValue is the time value in milli seconds
@@ -35,11 +28,4 @@ void init_timer_CTC(u8 id, u8 TimerValue)
 		TCCR2 = 0b0001101;
 		TIMSK |= (1 << OCIE2);
 	}
-	
-	/*
-	*((u8 *)(OCRs[id])) = (u8) counts;
-	// CTC mode with 1024 prescalar
-	*((u8 *)(TCCRs[id])) = 0b0001101;
-	*((u8 *)(TIMSK)) |= (1 << OCIEs[id]);
-	*/
 }

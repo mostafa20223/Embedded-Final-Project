@@ -9,12 +9,12 @@
 
 #include "../standard/Basic_Types.h"
 #include "../standard/std_macros.h"
-#include "../MCAL/DIO.h"
-#include "../HAL/LCD_config.h"
 #include "../HAL/LCD.h"
 #include "../HAL/Keypad.h"
 #include "../MCAL/SPI.h"
-#include "../Timer.h"
+#include "../MCAL/ADC.h"
+#include "../MCAL/pwm.h"
+#include "../schedular/Scheduler.h"
 #include "../MCAL/ADC.h"
 
 /*
@@ -82,11 +82,43 @@ void SET_Temp(void);
 void CRT_Temp(void);
 
 /*
+	Function Name        : getCurrentTemp
+	Function Returns     : void
+	Function Arguments   : void
+	Function Description : Get temperature from TC72 temperature sensor
+*/
+u16 getCurrentTemp(void);
+
+/*
+	Function Name        : getSetTemp
+	Function Returns     : void
+	Function Arguments   : void
+	Function Description : Get temperature entered by the user using keypad
+*/
+u16 getSetTemp(void);
+
+/*
+	Function Name        : getSetTemp
+	Function Returns     : void
+	Function Arguments   : void
+	Function Description : Get temperature entered by the user using keypad
+*/
+float64_t GetVt(void);
+
+/*
 	Function Name        : getADCVal
 	Function Returns     : float64_t
 	Function Arguments   : void
 	Function Description : Start SPI communication with TC72 (Temperature Sensor)
 */
 float64_t getADCVal(void);
+
+/*
+	Function Name        : getSetTemp
+	Function Returns     : void
+	Function Arguments   : void
+	Function Description : Get temperature entered by the user using keypad
+*/
+void drivePWM(void);
 
 #endif /* APP_H */

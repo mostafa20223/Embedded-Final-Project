@@ -44,16 +44,13 @@ SUBDIRS :=  \
 C_SRCS +=  \
 ../APPL/app.c \
 ../MCAL/pwm.c \
-../schedular/Scheduler.c \
-../schedular/systemState.c \
 ../schedular/timer8bit.c \
 ../HAL/Keypad.c \
 ../HAL/LCD.c \
 ../MCAL/ADC.c \
 ../MCAL/DIO.c \
 ../MCAL/SPI.c \
-../main.c \
-../Timer.c
+../main.c
 
 
 PREPROCESSING_SRCS += 
@@ -65,58 +62,46 @@ ASM_SRCS +=
 OBJS +=  \
 APPL/app.o \
 MCAL/pwm.o \
-schedular/Scheduler.o \
-schedular/systemState.o \
 schedular/timer8bit.o \
 HAL/Keypad.o \
 HAL/LCD.o \
 MCAL/ADC.o \
 MCAL/DIO.o \
 MCAL/SPI.o \
-main.o \
-Timer.o
+main.o
 
 OBJS_AS_ARGS +=  \
 APPL/app.o \
 MCAL/pwm.o \
-schedular/Scheduler.o \
-schedular/systemState.o \
 schedular/timer8bit.o \
 HAL/Keypad.o \
 HAL/LCD.o \
 MCAL/ADC.o \
 MCAL/DIO.o \
 MCAL/SPI.o \
-main.o \
-Timer.o
+main.o
 
 C_DEPS +=  \
 APPL/app.d \
 MCAL/pwm.d \
-schedular/Scheduler.d \
-schedular/systemState.d \
 schedular/timer8bit.d \
 HAL/Keypad.d \
 HAL/LCD.d \
 MCAL/ADC.d \
 MCAL/DIO.d \
 MCAL/SPI.d \
-main.d \
-Timer.d
+main.d
 
 C_DEPS_AS_ARGS +=  \
 APPL/app.d \
 MCAL/pwm.d \
-schedular/Scheduler.d \
-schedular/systemState.d \
 schedular/timer8bit.d \
 HAL/Keypad.d \
 HAL/LCD.d \
 MCAL/ADC.d \
 MCAL/DIO.d \
 MCAL/SPI.d \
-main.d \
-Timer.d
+main.d
 
 OUTPUT_FILE_PATH +=main.elf
 
@@ -140,20 +125,6 @@ APPL/app.o: ../APPL/app.c
 	
 
 MCAL/pwm.o: ../MCAL/pwm.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-schedular/Scheduler.o: ../schedular/Scheduler.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-schedular/systemState.o: ../schedular/systemState.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
@@ -203,13 +174,6 @@ MCAL/SPI.o: ../MCAL/SPI.c
 	
 
 ./main.o: .././main.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-./Timer.o: .././Timer.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

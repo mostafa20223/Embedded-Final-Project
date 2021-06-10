@@ -10,7 +10,6 @@ GEN_OPTS__FLAG :=
 GEN_CMDS__FLAG := 
 
 ORDERED_OBJS += \
-"./Timer.obj" \
 "./main.obj" \
 "./APPL/app.obj" \
 "./HAL/Keypad.obj" \
@@ -172,8 +171,8 @@ Final_Project.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "Timer.obj" "main.obj" "APPL\app.obj" "HAL\Keypad.obj" "HAL\LCD.obj" "MCAL\ADC.obj" "MCAL\DIO.obj" "MCAL\SPI.obj" "MCAL\pwm.obj" "schedular\Scheduler.obj" "schedular\systemState.obj" "schedular\timer8bit.obj" 
-	-$(RM) "Timer.d" "main.d" "APPL\app.d" "HAL\Keypad.d" "HAL\LCD.d" "MCAL\ADC.d" "MCAL\DIO.d" "MCAL\SPI.d" "MCAL\pwm.d" "schedular\Scheduler.d" "schedular\systemState.d" "schedular\timer8bit.d" 
+	-$(RM) "main.obj" "APPL\app.obj" "HAL\Keypad.obj" "HAL\LCD.obj" "MCAL\ADC.obj" "MCAL\DIO.obj" "MCAL\SPI.obj" "MCAL\pwm.obj" "schedular\Scheduler.obj" "schedular\systemState.obj" "schedular\timer8bit.obj" 
+	-$(RM) "main.d" "APPL\app.d" "HAL\Keypad.d" "HAL\LCD.d" "MCAL\ADC.d" "MCAL\DIO.d" "MCAL\SPI.d" "MCAL\pwm.d" "schedular\Scheduler.d" "schedular\systemState.d" "schedular\timer8bit.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

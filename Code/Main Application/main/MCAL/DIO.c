@@ -1,5 +1,3 @@
-#include <avr/io.h>
-#include "../standard/std_macros.h"
 #include "DIO.h"
 
 void DIO_vsetPINDir(u8 portname, u8 pinnumber, u8 direction)
@@ -86,7 +84,7 @@ void DIO_write(u8 portname, u8 pinnumber, u8 outputvalue)
 			}
 			break;
 		case 'D':
-			if(outputvalue == 1)
+			if (outputvalue == 1)
 			{
 				SET_BIT(PORTD, pinnumber); /* Set the value of the given pin in port D as High */
 			}
@@ -213,12 +211,12 @@ u8 DIO_read_port(u8 portname)
 	return return_val;
 }
 
-void DIO_vconnectpullup(char portname, char pinnumber, char connect_pullup)
+void DIO_vconnectpullup(c8 portname, c8 pinnumber, c8 connect_pullup)
 {
 	switch(portname)
 	{
 		case 'A':
-			if(connect_pullup == 1)
+			if (connect_pullup == 1)
 			{
 				SET_BIT(PORTA, pinnumber);
 			}
@@ -228,7 +226,7 @@ void DIO_vconnectpullup(char portname, char pinnumber, char connect_pullup)
 			}
 			break;
 		case 'B':
-			if(connect_pullup == 1)
+			if (connect_pullup == 1)
 			{
 				SET_BIT(PORTB, pinnumber);
 			}
@@ -238,7 +236,7 @@ void DIO_vconnectpullup(char portname, char pinnumber, char connect_pullup)
 			}
 			break;
 		case 'C':
-			if(connect_pullup == 1)
+			if (connect_pullup == 1)
 			{
 				SET_BIT(PORTC, pinnumber);
 			
@@ -249,7 +247,7 @@ void DIO_vconnectpullup(char portname, char pinnumber, char connect_pullup)
 			}
 			break;
 		case 'D':
-			if(connect_pullup == 1)
+			if (connect_pullup == 1)
 			{
 				SET_BIT(PORTD, pinnumber);
 			

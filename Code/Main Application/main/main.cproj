@@ -132,31 +132,7 @@
     <Compile Include="MCAL\pwm.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="schedular\Interrupts.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="schedular\Interrupt_names.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="schedular\INT_R.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="schedular\io.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="schedular\Scheduler.c">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="schedular\Scheduler.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="schedular\sft_defs.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="schedular\systemState.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="schedular\systemState.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="schedular\timer8bit.c">
@@ -208,12 +184,6 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="standard\std_macros.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Timer.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Timer.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>

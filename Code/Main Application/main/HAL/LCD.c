@@ -1,7 +1,3 @@
-#include <util/delay.h>
-
-#include "../MCAL/DIO.h"
-#include "LCD_config.h"
 #include "LCD.h"
 
 static u8 counter = 0;
@@ -11,10 +7,6 @@ void LCD_vInit(void)
 	_delay_ms(20);
 
 	#if defined eight_bits_mode
-		//for (counter = 0; counter < LCD_NPINs; ++counter)
-		//{
-			//DIO_vsetPINDir(LCD_PORT, counter, 1);
-		//}
 		DIO_vsetPINDir(LCD_PORT, 0, 1);
 		DIO_vsetPINDir(LCD_PORT, 1, 1);
 		DIO_vsetPINDir(LCD_PORT, 2, 1);
@@ -38,10 +30,6 @@ void LCD_vInit(void)
 	
 	/* We will work on 4-bis Mode */
 	#elif defined four_bits_mode
-		//for (counter = 4; counter < LCD_NPINs; ++counter)
-		//{
-			//DIO_vsetPINDir(LCD_PORT, counter, 1);
-		//}
 		DIO_vsetPINDir(LCD_PORT, 4, 1);
 		DIO_vsetPINDir(LCD_PORT, 5, 1);
 		DIO_vsetPINDir(LCD_PORT, 6, 1);
@@ -116,13 +104,7 @@ void LCD_vSend_char(c8 data)
 void LCD_vSend_string(c8 * data)
 {
 	/* (*data): Pointer to first char of string */
-	//while((*data) != '\0')
-	//{
-		//LCD_vSend_char(*data);
-		//data = data + 1; /* To next char */
-	//}
-
-    for(counter = 0; data[counter] != '\0'; ++counter)
+    for (counter = 0; data[counter] != '\0'; ++counter)
     {
 	    LCD_vSend_char(data[counter]);
     }
@@ -153,19 +135,4 @@ void LCD_movecursor(c8 row, c8 coloumn)
 	
 	LCD_vSend_cmd(data);
 	_delay_ms(1);
-}
-
-void LCD_SendStringRowCol(u8 row, u8 col, c8 * data)
-{
-	LCD_movecursor(row, col);
-    for(counter = 0; data[counter] != '\0'; ++counter)
-    {
-	    LCD_vSend_char(data[counter]);
-    }
-}
-
-void LCD_SendCharRowCol(u8 row, u8 col, c8 data)
-{
-	LCD_movecursor(row, col);
-	LCD_vSend_char(data);
 }

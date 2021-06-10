@@ -1,13 +1,10 @@
 #ifndef LCD_CONFIG_H
 #define LCD_CONFIG_H
 
-#define four_bits_mode
-#define LCD_NPINs 4
-#define LCD_PORT 'D'
-#define RS_PORT 'A' /* Register Selection */
-#define RW_PORT 'A' /* Read/Write */
-#define EN_PORT 'A' /* Enable */
-#define Max_Row 2
-#define Max_Col 16
+#define four_bits_mode		/* Mode of LCD */
+#define LCD_PORT 'D'		/* LCD on PORTD */
+#define RS_PORT 'A'			/* Register Selection on PORTA */
+#define RW_PORT 'A'			/* Read/Write on PORTA */
+#define EN_PORT 'A'			/* Enable on PORTA */
 
 #endif /* LCD_CONFIG_H */

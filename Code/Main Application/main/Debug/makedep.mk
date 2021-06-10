@@ -6,10 +6,6 @@ APPL\app.c
 
 MCAL\pwm.c
 
-schedular\Scheduler.c
-
-schedular\systemState.c
-
 schedular\timer8bit.c
 
 HAL\Keypad.c
@@ -23,6 +19,4 @@ MCAL\DIO.c
 MCAL\SPI.c
 
 main.c
-
-Timer.c
 
