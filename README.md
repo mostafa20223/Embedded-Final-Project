@@ -14,11 +14,11 @@ This repo is for collaborating and collecting data for embedded  final project
 
 ## Additional Resources and Materials Used
 1. [Atmega32 Microcontroller Datasheet (Microchip)](https://ww1.microchip.com/downloads/en/DeviceDoc/doc2503.pdf)
-2. [LM016 character LCD]([Interfacing LCD16x2 with AVR ATmega16/ATmega32 in 4-bit mode | AV... (electronicwings.com)](https://www.electronicwings.com/avr-atmega/interfacing-lcd-16x2-in-4-bit-mode-with-atmega-16-32-))
+2. [LM016 character LCD](https://www.electronicwings.com/avr-atmega/interfacing-lcd-16x2-in-4-bit-mode-with-atmega-16-32-)
 3. [TC72 SPI to temperature convertor](https://aki-technical.blogspot.com/2020/07/atmega32-interfaces-to-tc72-spi.html)
 4. [4X3 Keypad](https://extremeelectronics.co.in/avr-tutorials/4x3-matrix-keypad-interface-avr-tutorial/)
-5. [PWM to voltage convertor module]([PWM in AVR ATmega16/ATmega32 | AVR ATmega Controllers (electronicwings.com)](https://www.electronicwings.com/avr-atmega/atmega1632-pwm))
-6. [Calibration resistor (ADC)]([ADC in AVR ATmega16/ATmega32 | AVR ATmega Controllers (electronicwings.com)](https://www.electronicwings.com/avr-atmega/atmega1632-adc))
+5. [PWM to voltage convertor module](https://www.electronicwings.com/avr-atmega/atmega1632-pwm)
+6. [Calibration resistor (ADC)](https://www.electronicwings.com/avr-atmega/atmega1632-adc)
 
 ## Team Information
 
