@@ -16,16 +16,36 @@ void init_timer_CTC(u8 id, u8 TimerValue)
 		setErrorFlag();
 		return;
 	}
+	
 	if (id == 0) /* Timer0 */
 	{
 		OCR0 = (u8) counts;
 		TCCR0 = 0b0001101;
 		TIMSK |= (1 << OCIE0);
 	}
-	else if (id == 2) /* Timer2 */
+	
+	else if (id == 1) /* Timer2 */
 	{
 		OCR2 = (u8) counts;
 		TCCR2 = 0b0001101;
 		TIMSK |= (1 << OCIE2);
 	}
+}
+
+void WDT_ON(void)
+{
+	/*
+	Watchdog timer enables with typical timeout period 2.1 
+	second.
+	*/
+	WDTCR = (1<<WDE)|(1<<WDP2)|(1<<WDP1)|(1<<WDP0);
+}
+
+void WDT_OFF(void)
+{
+	/*
+	This function use for disable the watchdog timer.
+	*/
+	WDTCR = (1<<WDTOE)|(1<<WDE);
+	WDTCR = 0x00;
 }

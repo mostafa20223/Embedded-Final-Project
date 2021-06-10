@@ -5,7 +5,7 @@ static u16 SetTemp = 0;
 static u16 CrtTemp = 0;
 static u8 temp[2];
 enum sysStates {STANDBY, OPERATION, NORMAL, ERROR};
-const c8 * StatesName[] = {"STANDBY", "OPERATION", "NORMAL", "ERROR"};
+//const c8 * StatesName[] = {"STANDBY", "OPERATION", "NORMAL", "ERROR"};
 static enum sysStates curState = STANDBY;
 static c8 hash_pressed = 0;
 static c8 errorFlag = 0;
@@ -14,23 +14,32 @@ static u8 minutes_elapsed = 0;
 static u16 minute_counter = 0;
 
 // FLAGS
-static char countMinutes = 0;
-static char checkTemp = 0;
-static char voltModule = 0;
-static char overHeating = 0;
+static c8 countMinutes = 0;
+static c8 checkTemp = 0;
+static c8 voltModule = 0;
+static c8 overHeating = 0;
+static c8 poteinVal = 0;
+
+/* Voltages */
+static float64_t Vt = 0.0;
+static float64_t Vr = 0.0;
+
+/* Temp Variables */
+static u16 currentTemp = 0;
+static u16 setTemp = 0;
+static u8 keyPress = 0;
 
 void Init(void)
 {
+	LCD_vInit();
+	keypad_vInit();
 	SPI_masterInit();
 	TC72_Init();
 	_delay_ms(150);
-	initADC0();
-	InitPWM();
 }
 
 void Welcome_Screen(void)
 {
-	LCD_vInit();
 	for (shift = 1; shift < 16; ++shift)
 	{
 		LCD_clearscreen();
@@ -55,8 +64,7 @@ void Welcome_Screen(void)
 
 void IDLE_Screen(void)
 {
-	LCD_vInit();
-	_delay_ms(20);
+	_delay_ms(15);
 	LCD_movecursor(1, 1);
 	LCD_vSend_string("SET:25");
 	LCD_movecursor(1, 11);
@@ -64,32 +72,38 @@ void IDLE_Screen(void)
 	LCD_movecursor(2, 1);
 	LCD_vSend_string("STATE:STANDBY");
 }
-	
+
 void UsrGetVal(void)
 {
-	keypad_vInit();
+	keyPress = 1;
 	u8 val = 0;
 	static const u8 col = 5;
 	static u8 counter = 0;
 	
 	LCD_movecursor(1, (counter + col));
-	val = getKey();
 	
-	if (val != '*' && val != '#')
+	while (val != '*' && val != '#')
 	{
-		LCD_vSend_char(val);
-		_delay_ms(100);
+		//val != '*' && val != '#'
+		val = getKey();
+		
+		if (val != '*' && val != '#')
+		{
+			LCD_vSend_char(val);
+		}
+		else
+		{
+			break;
+		}
+		
 		temp[counter] = val;
 		counter = counter + 1;
 		counter = counter % 2;
-		UsrGetVal();
 	}
-	else
-	{
-		SetTemp = atoi(temp);
-		LCD_movecursor(2, 1);
-		LCD_vSend_string("STATE:OPERATION");
-	}
+
+	SetTemp = atoi(temp);
+	hash_pressed = 1;
+	keyPress = 0;
 }
 
 c8 tc72_read(void)
@@ -136,21 +150,22 @@ u16 getSetTemp(void)
 
 float64_t GetVt(void)
 {
-	float64_t Vt = 0.0;
 	Vt = (float64_t) ((getSetTemp() - getCurrentTemp()) / 100.0) * 10.0;
 	return Vt;
 }
 
 float64_t getADCVal(void)
 {
+	initADC0();
 	u32 result = adc_read();
-	float64_t Vr = sampleToVolts(result);
+	Vr = sampleToVolts(result);
 	
 	return Vr;
 }
 
 void drivePWM(void)
 {
+	InitPWM();
 	float64_t Vt = GetVt();
 	float64_t Vr = getADCVal();
 	SetPWMOutput(Vr, Vt);
@@ -173,6 +188,10 @@ void setOverHeating(void)
 {
 	overHeating = 1;
 }
+void setPoteinVal(void)
+{
+	poteinVal = 1;
+}
 
 // FLAG clear
 void clearCountMinutes(void)
@@ -193,28 +212,36 @@ void clearOverHeating(void)
 {
 	overHeating = 0;
 }
+void clearPoteinVal(void)
+{
+	poteinVal = 0;
+}
 
 // ______________________
 
-ISR(TIMER2_COMP_vect)
+ISR (TIMER2_COMP_vect)
 {
-	schedule();
+	if (keyPress == 0)
+	{
+		schedule();
+	}
+	else
+	{
+		
+	}
 }
 
 void schedule(void)
 {
-	ms_elapsed += 1;
+	ms_elapsed = ms_elapsed + 1;
+	setState();
 
-	if (ms_elapsed % 50)
-	{
-		setState();
-	}
-	if (ms_elapsed % 100)
-	{
-		//fnc_array[1](3);
-	}
+	//if (!(ms_elapsed % 1))
+	//{
+		//setState();
+	//}
 
-	if (ms_elapsed % 200)
+	if (!(ms_elapsed % 200))
 	{
 		if (checkTemp)
 		{
@@ -224,10 +251,21 @@ void schedule(void)
 		{
 			drivePWM();
 		}
-
+	}
+	
+	if (!(ms_elapsed % 500))
+	{
+		if (poteinVal)
+		{
+			getADCVal();
+		}
+		else
+		{
+			/* Do nothing */
+		}
 	}
 
-	if (minutes_elapsed % 3)
+	if (!(minutes_elapsed % 3))
 	{
 		if (overHeating)
 		{
@@ -237,12 +275,12 @@ void schedule(void)
 
 	if (countMinutes)
 	{
-		minute_counter += 1;
+		minute_counter = minute_counter + 1;
 	}
-	if (minute_counter >= 60000)
+	if (!(minute_counter % 60000))
 	{
 		minute_counter = 0;
-		minutes_elapsed += 1;
+		minutes_elapsed = minutes_elapsed + 1;
 	}
 }
 
@@ -257,13 +295,16 @@ void setState(void)
 	{
 		case STANDBY:
 		{
+			IDLE_Screen();
+			UsrGetVal();
 			clearVoltModule();
 			clearCheckTemp();
-
-			if (getKey() == '#')
+			
+			if (hash_pressed == 1)
 			{
 				curState = OPERATION;
 			}
+			
 			break;
 		}
 
@@ -273,9 +314,16 @@ void setState(void)
 			LCD_vSend_string("STATE:OPERATION");
 			setCheckTemp();
 			setVoltModule();
+			setPoteinVal();
+			CRT_Temp();
 
-			u16 currentTemp = getCurrentTemp();
-			u16 setTemp = getSetTemp();
+			currentTemp = getCurrentTemp();
+			setTemp = getSetTemp();
+			
+			//if (setTemp <= currentTemp)
+			//{
+				///* Do nothing for now */
+			//}
 			if ((currentTemp > setTemp) && ((currentTemp - setTemp) <= 5))
 			{
 				curState = NORMAL;
@@ -288,21 +336,21 @@ void setState(void)
 				clearCountMinutes();
 				clearOverHeating();
 			}
-			else if ((currentTemp > setTemp) && ((currentTemp - setTemp) > 10))
-			{
-				curState = ERROR;
-			}
 			else if ((setTemp > currentTemp) && ((setTemp - currentTemp) > 5))
 			{
 				setCountMinutes();
 				setOverHeating();
 			}
-
-			if (getKey() == '#')
+			else
 			{
-				curState = STANDBY;
+				/* Do nothing */
 			}
-			if (errorFlag)
+
+			//if (hash_pressed == 1)
+			//{
+				//curState = STANDBY;
+			//}
+			if (errorFlag == 1)
 			{
 				curState = ERROR;
 			}
@@ -314,7 +362,30 @@ void setState(void)
 			LCD_movecursor(2, 1);
 			LCD_vSend_string("STATE:NORMAL");
 			setCheckTemp();
+			setPoteinVal();
 			clearVoltModule();
+			CRT_Temp();
+			
+			currentTemp = getCurrentTemp();
+			setTemp = getSetTemp();
+			
+			if ((setTemp > currentTemp) && (setTemp - currentTemp) > 5)
+			{
+				curState = OPERATION;
+			}
+			else if ((currentTemp > setTemp) && ((currentTemp - setTemp) > 10))
+			{
+				curState = ERROR;
+			}
+			else
+			{
+				/* Do nothing */
+			}
+			
+			if (errorFlag)
+			{
+				curState = ERROR;
+			}
 			break;
 		}
 
@@ -324,6 +395,7 @@ void setState(void)
 			LCD_vSend_string("STATE:ERROR");
 			clearCheckTemp();
 			clearVoltModule();
+			clearPoteinVal();
 			break;
 		}
 		

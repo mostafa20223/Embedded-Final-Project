@@ -15,4 +15,8 @@
 ********************************************************************/
 void init_timer_CTC(u8 id, u8 TimerValue);
 
+void WDT_ON(void);
+
+void WDT_OFF(void);
+
 #endif /* TIMER8BIT_H */

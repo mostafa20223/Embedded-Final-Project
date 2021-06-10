@@ -26,6 +26,7 @@ u8 Keypad_u8Scan(void)
 	{
 		KEYPAD_PORTC |= 0x0f;
 		CLR_BIT(KEYPAD_PORTC, row);
+		
 		for(column = 4; column < (N_Row + N_Col); ++column)
 		{
 			scan = READ_BIT(KEYPAD_PINs, column);
@@ -44,9 +45,10 @@ u8 getKey(void)
 	u8 key = 0;
 
 	/* Wait for key release if pressed on entry */
-	while(Keypad_u8Scan() != 0)
+	while (Keypad_u8Scan() != 0)
 	{
 		_delay_ms(10);
+		//key = 0;
 	}
 
 	/* Wait for new key press */

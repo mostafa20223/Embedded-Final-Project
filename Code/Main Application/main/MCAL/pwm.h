@@ -8,7 +8,7 @@
 
 #define PWM_DDR DDRB		/* Initialize PWM on DDRB */
 #define PWM_PORT PORTB		/* Initialize PWM on PORTB */
-#define PWM_PIN PINB3		/* Initialize PWM on PINB3 */
+#define PWM_PIN PB3			/* Initialize PWM on PINB3 */
 
 /********************************************************************
 	Function Name        : InitPWM
@@ -21,7 +21,7 @@ void InitPWM(void);
 /********************************************************************
 	Function Name        : SetPWMOutput
 	Function Returns     : void
-	Function Arguments   : float64_t vr, float64_t vt
+	Function Arguments   : u8 vr, u8 vt
 	Function Description : Set output of PWM (Duty Cycle)
 ********************************************************************/
 void SetPWMOutput(float64_t vr, float64_t vt);

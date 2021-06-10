@@ -26,18 +26,10 @@ u32 adc_read(void);
 
 /*******************************************************************************
 	Function Name        : sampleToVolts
-	Function Returns     : float64_t
+	Function Returns     : u8
 	Function Arguments   : u32 sample
 	Function Description : Convert ADC value to voltage
 *******************************************************************************/
-float64_t sampleToVolts(u32 sample);
-
-/*******************************************************************************
-	Function Name        : WriteVolt
-	Function Returns     : void
-	Function Arguments   : void
-	Function Description : Write voltage on PORTD
-*******************************************************************************/
-void WriteVolt(void);
+u8 sampleToVolts(u32 sample);
 
 #endif /* ADC_H */
