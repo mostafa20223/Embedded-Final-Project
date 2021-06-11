@@ -34,18 +34,11 @@ void init_timer_CTC(u8 id, u8 TimerValue)
 
 void WDT_ON(void)
 {
-	/*
-	Watchdog timer enables with typical timeout period 2.1 
-	second.
-	*/
-	WDTCR = (1<<WDE)|(1<<WDP2)|(1<<WDP1)|(1<<WDP0);
+	WDTCR = (1 << WDE) | (1 << WDP2) | (1 << WDP1) | (1 << WDP0);
 }
 
 void WDT_OFF(void)
 {
-	/*
-	This function use for disable the watchdog timer.
-	*/
-	WDTCR = (1<<WDTOE)|(1<<WDE);
+	WDTCR = (1 << WDTOE) | (1 << WDE);
 	WDTCR = 0x00;
 }

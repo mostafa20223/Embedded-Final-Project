@@ -15,8 +15,20 @@
 ********************************************************************/
 void init_timer_CTC(u8 id, u8 TimerValue);
 
+/********************************************************************
+	Function Name        : WDT_ON
+	Function Returns     : void
+	Function Arguments   : void
+	Function Description : Watch DOG Timer ON
+********************************************************************/
 void WDT_ON(void);
 
+/********************************************************************
+	Function Name        : WDT_OFF
+	Function Returns     : void
+	Function Arguments   : void
+	Function Description : Watch DOG Timer OFF
+********************************************************************/
 void WDT_OFF(void);
 
 #endif /* TIMER8BIT_H */

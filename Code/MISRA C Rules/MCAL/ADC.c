@@ -23,7 +23,7 @@ u32 adc_read(void)
 	return ADC;
 }
 
-float64_t sampleToVolts(u32 sample)
+u8 sampleToVolts(u32 sample)
 {
 	return sample * (5.0 / 1023.0);
 }

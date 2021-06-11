@@ -6,8 +6,6 @@
 #include "../standard/Basic_Types.h"
 #include "DIO.h"
 
-#define ADC_PORT 'D' /* Initialize ADC on PORTD */
-
 /*******************************************************************************
 	Function Name        : initADC0
 	Function Returns     : void

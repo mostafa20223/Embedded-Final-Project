@@ -5,17 +5,30 @@
 #include <util/delay.h>
 #include "../standard/Basic_Types.h"
 #include "TMR.h"
-#include "systemState.h"
-//#include "Interrupts.h"
-//#include "Interrupt_names.h"
-//#include "INT_R.h"
+#include "Scheduler.h"
 
-/*
+/********************************************************************
 	Function Name        : init_timer_CTC
 	Function Returns     : void
 	Function Arguments   : u8 id, u8 TimerValue
-	Function Description : Initialize essential functions in our application
-*/
+	Function Description : Initialize Timer0 or Timer1
+********************************************************************/
 void init_timer_CTC(u8 id, u8 TimerValue);
+
+/********************************************************************
+	Function Name        : WDT_ON
+	Function Returns     : void
+	Function Arguments   : void
+	Function Description : Watch DOG Timer ON
+********************************************************************/
+void WDT_ON(void);
+
+/********************************************************************
+	Function Name        : WDT_OFF
+	Function Returns     : void
+	Function Arguments   : void
+	Function Description : Watch DOG Timer OFF
+********************************************************************/
+void WDT_OFF(void);
 
 #endif /* TIMER8BIT_H */

@@ -1,11 +1,4 @@
-#include <avr/io.h>
-#include <avr/interrupt.h>
-#include <util/delay.h>
-
-#include "../standard/std_macros.h"
-#include "DIO.h"
 #include "SPI.h"
-#include "../HAL/LCD.h"
 
 void SPI_masterInit(void)
 {
@@ -24,7 +17,7 @@ void SPI_masterInit(void)
 	SET_BIT(SPCR, SPIE);
 }
 
-void SPI_masterTransmit(char data)
+void SPI_masterTransmit(c8 data)
 {
 	/* Start the Transmission */
 	SPDR = data;
@@ -33,7 +26,7 @@ void SPI_masterTransmit(char data)
 	while(!(SPSR & (1 << SPIF)));
 }
 
-char SPI_masterReceive(void)
+c8 SPI_masterReceive(void)
 {
 	/* wait for the SPI buffer's full */
 	while(!(SPSR & (1 << SPIF)));

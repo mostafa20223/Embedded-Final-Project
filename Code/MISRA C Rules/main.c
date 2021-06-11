@@ -2,31 +2,19 @@
 
 int main(void)
 {
+	WDT_OFF();
 	Init();
 	Welcome_Screen();
-	IDLE_Screen();
-	UsrGetVal();
 
-	//StartApp();
+	//init_timer_CTC(1, 1);
 	//sei();
 	
     /* Replace with your application code */
     while (1)
     {
-		//LCD_vSend_char('A');
-		//T0delay();
-		//LCD_vSend_char('B');
-		//T0delay();
 		
-		//CRT_Temp();
-		float64_t Vr = getADCVal();
+		schedule();
 		
-
     }
 
 }
-
-//ISR(SPI_STC_vect)
-//{
-	//UsrGetVal();
-//}

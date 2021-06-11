@@ -1,7 +1,3 @@
-#include <avr/io.h>
-#include <util/delay.h>
-#include "../MCAL/DIO.h"
-#include "../standard/std_macros.h"
 #include "Keypad.h"
 
 static const u8 kp[N_Row][N_Col] =
@@ -14,9 +10,9 @@ static const u8 kp[N_Row][N_Col] =
 
 void keypad_vInit(void)
 {
-	DDRC = 0x0f;
+	DIO_set_port_direction(KEYPAD_PORT, 0x0f);
 	CLR_BIT(SFIOR, PUD);
-	PORTC = 0xff;
+	DIO_write_port(KEYPAD_PORT, 0xff);
 }
 
 u8 Keypad_u8Scan(void)
@@ -28,11 +24,12 @@ u8 Keypad_u8Scan(void)
 
 	for(row = 0; row < N_Row; ++row)
 	{
-		PORTC |= 0x0f;
-		CLR_BIT(PORTC, row);
+		KEYPAD_PORTC |= 0x0f;
+		CLR_BIT(KEYPAD_PORTC, row);
+		
 		for(column = 4; column < (N_Row + N_Col); ++column)
 		{
-			scan = READ_BIT(PINC, column);
+			scan = READ_BIT(KEYPAD_PINs, column);
 			if(scan == 0)
 			{
 				buttonPressed = kp[row][column - 4];
@@ -48,9 +45,10 @@ u8 getKey(void)
 	u8 key = 0;
 
 	/* Wait for key release if pressed on entry */
-	while(Keypad_u8Scan() != 0)
+	while (Keypad_u8Scan() != 0)
 	{
 		_delay_ms(10);
+		//key = 0;
 	}
 
 	/* Wait for new key press */

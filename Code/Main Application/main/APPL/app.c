@@ -5,15 +5,14 @@ static u16 SetTemp = 0;
 static u16 CrtTemp = 0;
 static u8 temp[2];
 enum sysStates {STANDBY, OPERATION, NORMAL, ERROR};
-//const c8 * StatesName[] = {"STANDBY", "OPERATION", "NORMAL", "ERROR"};
 static enum sysStates curState = STANDBY;
+
+// FLAGS
 static c8 hash_pressed = 0;
 static c8 errorFlag = 0;
 static u16 ms_elapsed = 0;
 static u8 minutes_elapsed = 0;
 static u16 minute_counter = 0;
-
-// FLAGS
 static c8 countMinutes = 0;
 static c8 checkTemp = 0;
 static c8 voltModule = 0;
@@ -27,7 +26,6 @@ static float64_t Vr = 0.0;
 /* Temp Variables */
 static u16 currentTemp = 0;
 static u16 setTemp = 0;
-static u8 keyPress = 0;
 
 void Init(void)
 {
@@ -75,8 +73,7 @@ void IDLE_Screen(void)
 
 void UsrGetVal(void)
 {
-	keyPress = 1;
-	u8 val = 0;
+	static u8 val = 0;
 	static const u8 col = 5;
 	static u8 counter = 0;
 	
@@ -90,39 +87,32 @@ void UsrGetVal(void)
 		if (val != '*' && val != '#')
 		{
 			LCD_vSend_char(val);
+			temp[counter] = val;
+			counter = counter + 1;
+			counter = counter % 2;
 		}
 		else
 		{
+			SetTemp = atoi(temp);
+			hash_pressed = 1;
 			break;
 		}
-		
-		temp[counter] = val;
-		counter = counter + 1;
-		counter = counter % 2;
 	}
-
-	SetTemp = atoi(temp);
-	hash_pressed = 1;
-	keyPress = 0;
 }
 
 c8 tc72_read(void)
 {
     c8 MSB = 0;
-	
-	while(1)
-	{
-		/* MSB */
-		SPI_PORT |= (1 << SS);
-		SPI_masterTransmit(0x02);            /* Read will be from MSB temperature register */
-		SPI_masterTransmit(0x00);
-		SPI_PORT &= ~(1 << SS);
+	/* MSB */
+	SPI_PORT |= (1 << SS);
+	SPI_masterTransmit(0x02);            /* Read will be from MSB temperature register */
+	SPI_masterTransmit(0x00);
+	SPI_PORT &= ~(1 << SS);
 
-		_delay_ms(1);
-		MSB = SPI_masterReceive();
+	_delay_ms(1);
+	MSB = SPI_masterReceive();
 		
-		return MSB;
-	}
+	return MSB;
 }
 
 void CRT_Temp(void)
@@ -221,14 +211,7 @@ void clearPoteinVal(void)
 
 ISR (TIMER2_COMP_vect)
 {
-	if (keyPress == 0)
-	{
-		schedule();
-	}
-	else
-	{
-		
-	}
+	schedule();
 }
 
 void schedule(void)
@@ -241,7 +224,7 @@ void schedule(void)
 		//setState();
 	//}
 
-	if (!(ms_elapsed % 200))
+	if (ms_elapsed % 200)
 	{
 		if (checkTemp)
 		{
@@ -253,7 +236,7 @@ void schedule(void)
 		}
 	}
 	
-	if (!(ms_elapsed % 500))
+	if (ms_elapsed % 500)
 	{
 		if (poteinVal)
 		{
@@ -265,7 +248,7 @@ void schedule(void)
 		}
 	}
 
-	if (!(minutes_elapsed % 3))
+	if (minutes_elapsed % 3)
 	{
 		if (overHeating)
 		{
@@ -277,7 +260,7 @@ void schedule(void)
 	{
 		minute_counter = minute_counter + 1;
 	}
-	if (!(minute_counter % 60000))
+	if (minute_counter % 60000)
 	{
 		minute_counter = 0;
 		minutes_elapsed = minutes_elapsed + 1;
