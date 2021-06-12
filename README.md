@@ -11,6 +11,7 @@ This repo is for collaborating and collecting data for embedded  final project
 * [Presentation](https://github.com/mostafa20223/Embedded-Final-Project/tree/main/Presentation)
 * [Resources](https://github.com/mostafa20223/Embedded-Final-Project/tree/main/Resources)
 * [Simulation](https://github.com/mostafa20223/Embedded-Final-Project/tree/main/Simulation)
+* [Video](https://github.com/mostafa20223/Embedded-Final-Project/tree/main/Video)
 
 ## Additional Resources and Materials Used
 1. [Atmega32 Microcontroller Datasheet (Microchip)](https://ww1.microchip.com/downloads/en/DeviceDoc/doc2503.pdf)
@@ -30,4 +31,8 @@ This repo is for collaborating and collecting data for embedded  final project
 | Renad Taher      | 1    | 34   |
 | Mariem Ahmed     | 2    | 29   |
 | Mustafa Yehia    | 2    | 33   |
+
+## Video Link
+
+* [Video Link](https://www.dropbox.com/s/b5okfutdw4rngv3/Embedded%20Final%20Project%20Video.mp4?dl=0)
 
