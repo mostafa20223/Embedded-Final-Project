@@ -113,7 +113,9 @@ PDE_DEPS__QUOTED :=
 SUBDIRS := \
 . \
 APPL \
+DIO \
 HAL \
+LCD \
 MCAL \
 schedular \
 

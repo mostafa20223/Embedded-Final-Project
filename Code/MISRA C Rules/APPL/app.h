@@ -7,6 +7,7 @@
 #include <avr/interrupt.h>
 #include <util/delay.h>
 
+/******************************* Included Libraries ***********************************/
 #include "../standard/Basic_Types.h"
 #include "../standard/std_macros.h"
 #include "../HAL/LCD.h"
@@ -17,108 +18,92 @@
 #include "../schedular/Scheduler.h"
 #include "../MCAL/ADC.h"
 
-/*
+/********************************************************************
 	Function Name        : Init
 	Function Returns     : void
 	Function Arguments   : void
-	Function Description : Initialize essential functions in our application
-*/
+	Function Description : Initialize all functions for our app
+*********************************************************************/
 void Init(void);
 
-/*
+/********************************************************************
 	Function Name        : Welcome_Screen
 	Function Returns     : void
 	Function Arguments   : void
-	Function Description : Show "WELCOME" on LCD screen
-*/
+	Function Description : Display moving "WELCOME" on LCD screen
+********************************************************************/
 void Welcome_Screen(void);
 
-/*
+/********************************************************************
 	Function Name        : IDLE_Screen
 	Function Returns     : void
 	Function Arguments   : void
-	Function Description : Show IDLE Screen at the beginning of our application
-*/
+	Function Description : Display IDLE Screen at first
+********************************************************************/
 void IDLE_Screen(void);
 
-/*
-	Function Name        : StartApp
-	Function Returns     : void
-	Function Arguments   : void
-	Function Description : Get entered value by user using keypad (Buttons)
-*/
-void StartApp(void);
-
-/*
+/********************************************************************
 	Function Name        : UsrGetVal
 	Function Returns     : u8
 	Function Arguments   : void
-	Function Description : Get entered value by user using keypad (Buttons)
-*/
+	Function Description : Get entered value by user using keypad
+********************************************************************/
 void UsrGetVal(void);
 
-/*
+/********************************************************************
 	Function Name        : tc72_read
 	Function Returns     : c8
 	Function Arguments   : void
 	Function Description : Start SPI communication with TC72 (Temperature Sensor)
-*/
-c8 tc72_read(void);
+********************************************************************/
+c8 tc72_read(void); /* We have a problem with this function */
 
-/*
-	Function Name        : SET_Temp
-	Function Returns     : void
-	Function Arguments   : void
-	Function Description : Start SPI communication with TC72 (Temperature Sensor)
-*/
-void SET_Temp(void);
-
-/*
+/********************************************************************
 	Function Name        : CRT_Temp
 	Function Returns     : void
 	Function Arguments   : void
-	Function Description : Start SPI communication with TC72 (Temperature Sensor)
-*/
+	Function Description : Get Current Temperature from TC72
+********************************************************************/
 void CRT_Temp(void);
 
-/*
+/********************************************************************
 	Function Name        : getCurrentTemp
-	Function Returns     : void
+	Function Returns     : u16
 	Function Arguments   : void
-	Function Description : Get temperature from TC72 temperature sensor
-*/
+	Function Description : Retrieve current temperature value
+********************************************************************/
 u16 getCurrentTemp(void);
 
-/*
+/********************************************************************
 	Function Name        : getSetTemp
-	Function Returns     : void
+	Function Returns     : u16
 	Function Arguments   : void
-	Function Description : Get temperature entered by the user using keypad
-*/
+	Function Description : Retrieve set temperature by user
+********************************************************************/
 u16 getSetTemp(void);
 
-/*
-	Function Name        : getSetTemp
-	Function Returns     : void
+/********************************************************************
+	Function Name        : GetVt
+	Function Returns     : float64_t
 	Function Arguments   : void
-	Function Description : Get temperature entered by the user using keypad
-*/
+	Function Description : Get Vt (Volt from temperature difference)
+********************************************************************/
 float64_t GetVt(void);
 
-/*
+/********************************************************************
 	Function Name        : getADCVal
 	Function Returns     : float64_t
 	Function Arguments   : void
-	Function Description : Start SPI communication with TC72 (Temperature Sensor)
-*/
+	Function Description : Get Vr (Volt from calibration resistor)
+********************************************************************/
 float64_t getADCVal(void);
 
-/*
-	Function Name        : getSetTemp
+/********************************************************************
+	Function Name        : drivePWM
 	Function Returns     : void
 	Function Arguments   : void
-	Function Description : Get temperature entered by the user using keypad
-*/
+	Function Description : Drive PWM pulses
+********************************************************************/
 void drivePWM(void);
 
 #endif /* APP_H */
